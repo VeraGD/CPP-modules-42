@@ -18,3 +18,43 @@ Contact::Contact(std::string first_name, std::string last_name,
     this->init = 1;
     return ;
 }
+
+std::string Contact::get_first_name(void)
+{
+    return first_name;
+}
+
+std::string Contact::get_last_name(void)
+{
+    return last_name;
+}
+
+std::string Contact::get_nickname(void)
+{
+    return nickname;
+}
+
+std::string Contact::get_number(void)
+{
+    return number;
+}
+
+std::string Contact::get_secret(void)
+{
+    return secret;
+}
+
+int Contact::get_index(void)
+{
+    return index;
+}
+
+void Contact::set_index(int ind)
+{
+    index = ind;
+}
+
+int Contact::get_init(void)
+{
+    return init;
+}

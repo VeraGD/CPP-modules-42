@@ -6,10 +6,8 @@ Account::Account(int initial_deposit)
 	_accountIndex = Account::getNbAccounts();
 	_nbDeposits = 0;
 	_nbWithdrawals = 0;
-	// to access a static member variable it must first be assigned below the Class
 	Account::_nbAccounts += 1;
 	Account::_totalAmount += initial_deposit;
-    // Print log of what was done
 	Account::_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";";
@@ -68,10 +66,8 @@ void	Account::makeDeposit( int deposit )
     std::cout << "p_amount:" << _amount << ";";
 	_amount += deposit;
 	_nbDeposits += 1;
-	// and update total
 	_totalAmount += deposit;
 	_totalNbDeposits += 1;
-    // post-deposit loglines
     std::cout << "deposit:" << deposit << ";";
     std::cout << "amount:" << _amount << ";";
     std::cout << "nb_deposits:" << _totalNbDeposits << std::endl;
@@ -81,7 +77,6 @@ bool	Account::makeWithdrawal( int withdrawal )
     _displayTimestamp();
     std::cout << "index:" << _accountIndex << ";";
     std::cout << "p_amount:" << _amount << ";";
-    // post-deposit loglines
     std::cout << "withdrawl:";
     if (_amount < withdrawal)
     {
@@ -92,7 +87,6 @@ bool	Account::makeWithdrawal( int withdrawal )
     {
         _amount -= withdrawal;
         _nbWithdrawals += 1;
-        // and update total
         _totalAmount -= withdrawal;
         _totalNbWithdrawals += 1;
         std::cout << withdrawal << ";";

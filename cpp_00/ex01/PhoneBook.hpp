@@ -13,13 +13,14 @@ public:
     void    search_contact(void);
 
 private:
-    int     _counter_contacts(void);
-    int     _len_string(char *str);
-    void    _print_attribute(const std::string& str);
-    void    _print_one_contact(int in);
-    void    _add_new(Contact contact);
-    void    _print_contacts(void);
-    void    _print_data(char ind);
+    int     counter_contacts(void);
+    int     len_string(char *str);
+    void    print_attribute(const std::string& str);
+    void    print_one_contact(int in);
+    void    add_new(Contact contact);
+    void    print_contacts(void);
+    void    print_data(int ind);
+    int     atoi(std::string str);
 };
 
 #endif
