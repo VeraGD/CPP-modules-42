@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap()
+ClapTrap::ClapTrap(): hitPoint(10), energyPoint(10), attackDamage(0)
 {
     std::cout << "ClapTrap Default Constructor called." << std::endl;
 }
@@ -115,4 +115,19 @@ void ClapTrap::beRepaired(unsigned int amount)
         std::cout << "ClapTrap " << this->name << " cannot repair itself, ";
         std::cout << "it has no hit points." << std::endl;
     }
+}
+
+int ClapTrap::getHit(void)
+{
+    return hitPoint;
+}
+
+int ClapTrap::getEnergy(void)
+{
+    return energyPoint;
+}
+
+int ClapTrap::getAttack(void)
+{
+    return attackDamage;
 }

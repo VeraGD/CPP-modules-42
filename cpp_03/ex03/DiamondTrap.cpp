@@ -1,17 +1,24 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap()
+DiamondTrap::DiamondTrap(): ClapTrap("default_clap_name"), name("default")
 {
+    ScavTrap temp;
+
     std::cout << "DiamondTrap Default Constructor" << std::endl;
+    hitPoint = FragTrap::getHit();
+    energyPoint = temp.getEnergy();
+    attackDamage = FragTrap::getAttack();
 }
 
-DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_name"), ScavTrap(), FragTrap(), name(name)
+DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_name"), name(name)
 {
-    hitPoint = hitPoint;
-    energyPoint = energy;
-    attackDamage = att;
+    ScavTrap	temp;
+
+    hitPoint = FragTrap::getHit();
+    energyPoint = temp.getEnergy();
+    attackDamage = FragTrap::getAttack();
     std::cout << "DiamondTrap Constructor" << std::endl;
-    std::cout << "hit: " << hitPoint << " energy: " << energyPoint << " attack: " << attackDamage << std::endl;
+    std::cout << "hit: " << DiamondTrap::hitPoint << " energy: " << DiamondTrap::energyPoint << " attack: " << DiamondTrap::attackDamage << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& d)
@@ -30,7 +37,7 @@ DiamondTrap::~DiamondTrap()
     std::cout << "DiamondTrap Deconstructor" << std::endl;
 }
 
-DiamondTrap& DiamondTrap::operator=(DiamondTrap& d)
+/* DiamondTrap& DiamondTrap::operator=(DiamondTrap& d)
 {
     if (this != &d)
 	{
@@ -41,12 +48,7 @@ DiamondTrap& DiamondTrap::operator=(DiamondTrap& d)
         attackDamage = d.attackDamage;
     }
     return *this;
-}
-
-void DiamondTrap::attack(const std::string& target)
-{
-    ScavTrap::attack(target);
-}
+} */
 
 void DiamondTrap::whoAmI(void)
 {
