@@ -147,7 +147,7 @@ void    PhoneBook::add_contact(void)
 
     std::cout << "Input the first name of the contact: ";
     std::cin >> first_name;
-    std::cout << "Input the flast name of the contact: ";
+    std::cout << "Input the last name of the contact: ";
     std::cin >> last_name;
     std::cout << "Input the nickname of the contact: ";
     std::cin >> nickname;

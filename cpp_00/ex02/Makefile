@@ -1,5 +1,5 @@
 NAME = account
-CFLAGS = -Wextra -Wall -Werror
+CFLAGS = -Wextra -Wall -Werror -std=c++98
 CC = c++
 
 SRCS = Account.cpp \
