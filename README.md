@@ -1,7 +1,7 @@
 # CPP modules 42
 
 ### cpp_00
-In progress 〽️
+✅ 100 ✅
 
 ### cpp_01
 In progress 〽️
