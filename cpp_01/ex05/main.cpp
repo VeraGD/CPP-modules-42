@@ -1,6 +1,6 @@
 #include "Harl.hpp"
 
-int main()
+/*int main()
 {
     std::string level;
     Harl h;
@@ -18,4 +18,19 @@ int main()
         }
         h.complain(level);
     }
+}*/
+
+int	main(void)
+{
+	Harl	h;
+
+	h.complain("INFO");
+	std::cout << "-----------------------" << std::endl;
+	h.complain("ERROR");
+	std::cout << "-----------------------" << std::endl;
+	h.complain("WARNING");
+	std::cout << "-----------------------" << std::endl;
+	h.complain("DEBUG");
+	std::cout << "-----------------------" << std::endl;
+	h.complain("Whatever");
 }

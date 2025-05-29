@@ -6,9 +6,10 @@
  //#include <cstring>
 
 class HumanA {
-    public:
-        class Weapon &weapon;
+	private:
+		class Weapon &weapon;
         std::string name;
+    public:
         HumanA(std::string name, class Weapon &weapon);
         ~HumanA();
         void    attack(void);

@@ -3,12 +3,13 @@
 
 #include <iostream>
 #include "Weapon.hpp"
- //#include <cstring>
 
 class HumanB {
+	private:
+		class Weapon *weapon;
+		std::string name;
     public:
-        class Weapon *weapon;
-        std::string name;
+		HumanB();
         HumanB(std::string name);
         ~HumanB();
         void    attack(void);

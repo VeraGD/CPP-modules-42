@@ -1,4 +1,4 @@
-NAME = zombie
+NAME = zombieHorde
 CFLAGS = -Wextra -Wall -Werror -std=c++98
 CC = c++
 
@@ -17,7 +17,7 @@ all : $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "${GREEN}zombie compiled"
+	@echo "${GREEN}zombieHorde compiled"
 
 clean:
 	@rm -f $(OBJS)

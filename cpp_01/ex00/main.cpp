@@ -3,7 +3,6 @@
 int main(void)
 {
     std::cout << "-----------randomChump--------------" << std::endl;
-    Zombie y;
     randomChump("Pepe");
     std::cout << std::endl;
 

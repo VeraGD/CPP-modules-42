@@ -7,18 +7,18 @@ Zombie::Zombie()
 
 Zombie::Zombie(std::string name)
 {
-    this->_name = name;
+    this->name = name;
 }
 
 Zombie::~Zombie()
 {
-    if (!_name.empty())
+    if (!name.empty())
     {
-        std::cout << this->_name << " died." << std::endl;
+        std::cout << this->name << " died." << std::endl;
     }
 }
 
 void    Zombie::announce(void)
 {
-    std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
