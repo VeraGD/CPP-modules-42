@@ -7,7 +7,7 @@
 ✅ 100 ✅
 
 ### cpp_02
-In progress 〽️
+✅ 100 ✅
 
 ### cpp_03
 In progress 〽️
