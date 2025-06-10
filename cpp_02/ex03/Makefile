@@ -1,5 +1,5 @@
 NAME = bsp
-CFLAGS = -Wextra -Wall -Werror
+CFLAGS = -Wextra -Wall -Werror -std=c++98
 CC = c++
 
 SRCS = Fixed.cpp \

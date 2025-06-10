@@ -13,16 +13,6 @@ Point::~Point()
     return ;
 }
 
-/* Point& Point::operator=(const Point& p)
-{
-    if (this != &p)
-    {
-        x = p.x.getRawBits(x);
-        y = p.y;
-    }
-    return *this;
-} */
-
 Fixed Point::getX() const
 {
     return x;

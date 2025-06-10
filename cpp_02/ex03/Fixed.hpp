@@ -6,7 +6,7 @@
 
 class Fixed {
         private:
-            int32_t fp_value = 0;
+            int32_t fp_value;
             static const int f_bits = 8;
         
         public:

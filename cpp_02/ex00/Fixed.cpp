@@ -2,10 +2,11 @@
 
 Fixed::Fixed()
 {
+	fp_value = 0;
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& fixed) // si fuese otro valor y no 0 -> this->fp_value = fixed.fp_value
+Fixed::Fixed(const Fixed& fixed)
 {
     if (this == &fixed)
 		return ;

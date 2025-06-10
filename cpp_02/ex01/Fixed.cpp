@@ -1,13 +1,12 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed(): fp_value(0)
 {
     std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int value)
 {
-    //fp_value = value;
     fp_value = value * (1 << f_bits);
     std::cout << "Int constructor called" << std::endl;
 }
@@ -18,7 +17,7 @@ Fixed::Fixed(const float value)
     std::cout << "Float constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& fixed) // si fuese otro valor y no 0 -> this->fp_value = fixed.fp_value
+Fixed::Fixed(const Fixed& fixed)
 {
     if (this == &fixed)
 		return ;
@@ -30,16 +29,6 @@ Fixed::~Fixed()
 {
     std::cout << "Destructor called" << std::endl;
 }
-
-/* Fixed &Fixed::operator=(Fixed& other)
-{
-    if (this != &other)
-	{
-		std::cout << "Copy assignment operator called" << std::endl;
-		fp_value = other.fp_value;
-	}
-	return *this;
-} */
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
@@ -72,12 +61,6 @@ float Fixed::toFloat(void) const
 {
     return fp_value / (float)(1 << f_bits);
 }
-
-/* std::ostream& Fixed::operator<<(const Fixed& f)
-{
-    std::cout << f.toFloat();
-    return std::cout;
-} */
 
 std::ostream& operator<<(std::ostream& out, const Fixed& f) {
     out << f.toFloat();

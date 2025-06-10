@@ -5,7 +5,6 @@ static float area (const Point a, const Point b, const Point c)
 {
 	float	area;
 
-	//Area A = [ x1(y2 – y3) + x2(y3 – y1) + x3(y1-y2)]/2
 	area =	((a.getX().toFloat() * (b.getY().toFloat() - c.getY().toFloat()))
 			+ (b.getX().toFloat() * (c.getY().toFloat() - a.getY().toFloat()))
 			+ (c.getX().toFloat() * (a.getY().toFloat() - b.getY().toFloat()))) / 2;

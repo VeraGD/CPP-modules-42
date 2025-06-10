@@ -1,5 +1,5 @@
-NAME = fixedPoint
-CFLAGS = -Wextra -Wall -Werror
+NAME = fixedPoint2
+CFLAGS = -Wextra -Wall -Werror -std=c++98
 CC = c++
 
 SRCS = Fixed.cpp \
@@ -16,7 +16,7 @@ all : $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "${GREEN}fixedPoint compiled"
+	@echo "${GREEN}fixedPoint2 compiled"
 
 clean:
 	@rm -f $(OBJS)

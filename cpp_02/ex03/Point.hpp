@@ -21,6 +21,4 @@ class Point {
 
 bool bsp(Point const a, Point const b, Point const c, Point const point);
 
-bool    TrianglesAreaProach(const Point a, const Point b, const Point c, const Point p);
-
 #endif
