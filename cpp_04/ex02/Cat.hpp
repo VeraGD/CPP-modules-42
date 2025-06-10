@@ -1,10 +1,12 @@
 #ifndef CAT_H
 # define CAT_H
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
+#include "Brain.hpp"
 
-class Cat: public Animal {
-    
+class Cat: virtual public AAnimal {
+    private:
+		Brain *brain;
     public:
         Cat();
 		Cat(const Cat& cat);
