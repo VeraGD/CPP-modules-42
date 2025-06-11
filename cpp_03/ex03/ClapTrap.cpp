@@ -5,8 +5,6 @@ ClapTrap::ClapTrap(): hitPoint(10), energyPoint(10), attackDamage(0)
     std::cout << "ClapTrap Default Constructor called." << std::endl;
 }
 
-// Evita doble inicialización, Obligatorio para miembros const o referencias.
-// Más explícito y claro para constructores personalizados.
 ClapTrap::ClapTrap(std::string name): name(name), hitPoint(10), energyPoint(10), attackDamage(0)
 {
     std::cout << "ClapTrap Constructor called." << std::endl;

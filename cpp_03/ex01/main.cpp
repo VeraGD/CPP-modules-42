@@ -10,13 +10,7 @@ int main() {
     scavtrap.attack("pepa");
     scavtrap.takeDamage(20);
     scavtrap.guardGate();
-    std::cout << "\n------------------------" << std::endl;
-    ScavTrap mari("mari");
-    scavtrap = mari;
-    scavtrap.takeDamage(20);
-    std::cout << "\n------------------------" << std::endl;
-    ScavTrap juani(mari);
-    juani.takeDamage(30);
+	scavtrap.beRepaired(10);
     std::cout << "\n------------------------" << std::endl;
     return 0;
 }

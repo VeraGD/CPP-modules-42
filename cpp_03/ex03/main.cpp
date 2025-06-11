@@ -11,7 +11,9 @@ int main() {
     dt.attack("pepi");
     dt.takeDamage(30);
     dt.beRepaired(20);
-
+	dt.guardGate();
+	dt.highFivesGuys();
+	
     std::cout << "\n--------------------------" << std::endl;
     return 0;
 }

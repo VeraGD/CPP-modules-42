@@ -9,11 +9,13 @@ int main() {
     std::cout << "\n--- Creando ScavTrap ---" << std::endl;
     ScavTrap scav("Scavvy");
     scav.attack("Clappy");
+	scav.takeDamage(20);
     scav.beRepaired(9);
     scav.guardGate();
     std::cout << "\n--- Creando FragTrap ---" << std::endl;
     FragTrap frag("Fraggy");
     frag.attack("Scavvy");
+	frag.takeDamage(20);
     frag.beRepaired(5);
     frag.highFivesGuys();
     std::cout << "\n------------------------" << std::endl;

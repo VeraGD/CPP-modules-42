@@ -37,7 +37,7 @@ DiamondTrap::~DiamondTrap()
     std::cout << "DiamondTrap Deconstructor" << std::endl;
 }
 
-/* DiamondTrap& DiamondTrap::operator=(DiamondTrap& d)
+DiamondTrap& DiamondTrap::operator=(DiamondTrap& d)
 {
     if (this != &d)
 	{
@@ -48,7 +48,7 @@ DiamondTrap::~DiamondTrap()
         attackDamage = d.attackDamage;
     }
     return *this;
-} */
+}
 
 void DiamondTrap::whoAmI(void)
 {
