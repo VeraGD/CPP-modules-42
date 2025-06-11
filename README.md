@@ -10,7 +10,7 @@
 ✅ 100 ✅
 
 ### cpp_03
-In progress 〽️
+✅ 100 ✅
 
 ### cpp_04
 In progress 〽️
