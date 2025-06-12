@@ -1,5 +1,4 @@
 #include "AMateria.hpp"
-#include "ICharacter.hpp"
 
 AMateria::AMateria(): type("default")
 {
@@ -13,8 +12,6 @@ AMateria::AMateria(std::string const& type): type(type)
 
 AMateria::AMateria(const AMateria& materia)
 {
-	if (this == &materia)
-		return ;
 	std::cout << "AMateria copy constructor called" << std::endl;
 	type = materia.type;
 }
@@ -24,7 +21,7 @@ AMateria::~AMateria()
 	std::cout << "AMateria deconstructor" << std::endl;
 }
 
-AMateria& AMateria::operator=(AMateria& materia)
+AMateria& AMateria::operator=(const AMateria& materia)
 {
 	if (this != &materia)
 	{

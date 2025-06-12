@@ -2,7 +2,11 @@ NAME = interface
 CFLAGS = -Wextra -Wall -Werror -std=c++98
 CC = c++
 
-SRCS = 
+SRCS = AMateria.cpp \
+		Character.cpp \
+		Ice.cpp \
+		Cure.cpp \
+		MateriaSource.cpp \
 		main.cpp
 
 OBJS = $(SRCS:.cpp=.o)

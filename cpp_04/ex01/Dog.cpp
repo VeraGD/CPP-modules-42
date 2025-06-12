@@ -9,10 +9,12 @@ Dog::Dog()
 
 Dog::Dog(const Dog& dog)
 {
-	if (this == &dog)
-		return ;
 	std::cout << "Dog copy constructor called" << std::endl;
-	type = dog.type;
+    type = dog.type;
+    if (dog.brain)
+        brain = new Brain(*dog.brain);
+    else
+        brain = NULL;
 }
 
 Dog::~Dog()
@@ -27,6 +29,8 @@ Dog& Dog::operator=(Dog& dog)
 	{
 		std::cout << "Cat copy assignment operator called" << std::endl;
 		type = dog.type;
+		delete brain;
+        brain = new Brain(*dog.brain);
 	}
 	return *this;
 }

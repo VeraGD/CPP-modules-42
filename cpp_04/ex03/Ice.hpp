@@ -6,13 +6,11 @@
 
 class Ice: public AMateria
 {
-	protected:
-
 	public:
 		Ice();
 		Ice(const Ice& ice);
 		~Ice();
-		Ice& operator=(Ice& ice);
+		Ice& operator=(const Ice& ice);
 		Ice* clone() const;
 		void use(ICharacter& target);
 };
