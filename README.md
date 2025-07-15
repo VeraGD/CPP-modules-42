@@ -14,3 +14,9 @@
 
 ### cpp_04
 ✅ 100 ✅
+
+### cpp_05
+In progress :part_alternation_mark:
+
+### cpp_06
+In progress :part_alternation_mark:
