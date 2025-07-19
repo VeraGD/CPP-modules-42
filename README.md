@@ -16,7 +16,7 @@
 ✅ 100 ✅
 
 ### cpp_05
-In progress :part_alternation_mark:
+✅ 100 ✅
 
 ### cpp_06
 In progress :part_alternation_mark:
