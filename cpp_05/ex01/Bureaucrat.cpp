@@ -3,18 +3,18 @@
 Bureaucrat::Bureaucrat(): _name("default"), _grade(150)
 {
 	if (_grade < 1)
-		throw Bureaucrat::_gradeTooHighException();
+		throw Bureaucrat::gradeTooHighException();
 	if (_grade > 150)
-		throw Bureaucrat::_gradeTooLowException();
+		throw Bureaucrat::gradeTooLowException();
 	return ;
 }
 
 Bureaucrat::Bureaucrat(std::string _name, int _grade): _name(_name), _grade(_grade)
 {
 	if (_grade < 1)
-		throw Bureaucrat::_gradeTooHighException();
+		throw Bureaucrat::gradeTooHighException();
 	if (_grade > 150)
-		throw Bureaucrat::_gradeTooLowException();
+		throw Bureaucrat::gradeTooLowException();
 	return ;
 }
 
@@ -49,14 +49,14 @@ int Bureaucrat::get_grade(void) const
 void Bureaucrat::decrement_grade()
 {
 	if (_grade >= 150)
-		throw Bureaucrat::_gradeTooLowException();
+		throw Bureaucrat::gradeTooLowException();
 	_grade = _grade + 1;
 }
 
 void Bureaucrat::increment_grade()
 {
 	if (_grade <= 1)
-		throw Bureaucrat::_gradeTooHighException();
+		throw Bureaucrat::gradeTooHighException();
 	_grade = _grade - 1;
 }
 
@@ -71,16 +71,16 @@ void Bureaucrat::signForm(Form& f) const
 	{
 		std::cout << _name << " couldn't sign " << f.get_name();
 		std::cout << " because Bureaucrat grade is " << this->get_grade();
-		std::cout << " and Form grade to sign is " << f.get__gradeSign() << std::endl;
+		std::cout << " and Form grade to sign is " << f.get_gradeSign() << std::endl;
 	}
 }
 
-const char* Bureaucrat::_gradeTooHighException::what() const throw()
+const char* Bureaucrat::gradeTooHighException::what() const throw()
 {
     return "grade too high!";
 }
 
-const char* Bureaucrat::_gradeTooLowException::what() const throw()
+const char* Bureaucrat::gradeTooLowException::what() const throw()
 {
     return "grade too low!";
 }

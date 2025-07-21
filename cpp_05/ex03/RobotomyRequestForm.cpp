@@ -34,7 +34,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &s
 
 void RobotomyRequestForm::executeAction(const Bureaucrat&) const
 {
-	if (get__gradeSign() > 72 || get__gradeExecute() > 45)
+	if (get_gradeSign() > 72 || get_gradeExecute() > 45)
 	{
 		std::cout << "Robotomy failed" << std::endl;
 		throw AForm::CanNotExecute();

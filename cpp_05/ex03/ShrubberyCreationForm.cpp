@@ -34,7 +34,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void ShrubberyCreationForm::executeAction(const Bureaucrat&) const
 {
-	if (get__gradeSign() > 145 || get__gradeExecute() > 137)
+	if (get_gradeSign() > 145 || get_gradeExecute() > 137)
 		throw AForm::CanNotExecute();
 	else
 	{

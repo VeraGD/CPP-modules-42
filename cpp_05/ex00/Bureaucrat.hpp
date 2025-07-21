@@ -8,7 +8,6 @@ class Bureaucrat {
     private:
 		const std::string	_name;
 		int					_grade;
-		void validate_grade();
     
     public:
 		Bureaucrat();
@@ -21,11 +20,11 @@ class Bureaucrat {
 		void decrement_grade();
 		void increment_grade();
 
-		class _gradeTooHighException : public std::exception {
+		class gradeTooHighException : public std::exception {
 			const char* what() const throw();
 		};
 	
-		class _gradeTooLowException : public std::exception {
+		class gradeTooLowException : public std::exception {
 			const char* what() const throw();
 		};
 };

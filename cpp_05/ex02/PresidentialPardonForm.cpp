@@ -34,7 +34,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 
 void PresidentialPardonForm::executeAction(const Bureaucrat&) const
 {
-	if (get__gradeSign() > 25 || get__gradeExecute() > 5)
+	if (get_gradeSign() > 25 || get_gradeExecute() > 5)
 		throw AForm::CanNotExecute();
 	else
 	{
