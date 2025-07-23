@@ -11,22 +11,25 @@ Span::Span(unsigned int n): _N(n), _size(0), _vect(n)
 	return ;
 }
 
-// RELLENAR
-/*Span::Span(const Span &s)
+Span::Span(const Span &s)
 {
-
-}*/
+	_vect = s._vect;
+	_size = s._size;
+	_N = s._N;
+}
 
 Span::~Span()
 {
 	return ;
 }
 
-// RELLENAR
-/*Span &Span::operator=(const Span &s)
+Span &Span::operator=(const Span &s)
 {
-
-}*/
+	_vect = s._vect;
+	_size = s._size;
+	_N = s._N;
+	return (*this);
+}
 
 void Span::addNumber(int n)
 {
@@ -71,15 +74,6 @@ int Span::longestSpan()
 	}
 	return span;
 }
-
-/*void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
-{
-	while (begin != end)
-	{
-		addNumber(*begin);
-		begin++;
-	}
-}*/
 
 void Span::addRange(int* values, size_t count)
 {
