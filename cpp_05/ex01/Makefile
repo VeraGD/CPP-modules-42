@@ -1,4 +1,4 @@
-_name = form
+name = form
 CFLAGS = -Wextra -Wall -Werror -std=c++98
 CC = c++
 
@@ -10,20 +10,20 @@ OBJS = $(SRCS:.cpp=.o)
 
 GREEN = \033[1;32m
 
-all : $(_name)
+all : $(name)
 
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
-$(_name): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(_name)
+$(name): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(name)
 	@echo "${GREEN}form compiled"
 
 clean:
 	@rm -f $(OBJS)
 
 fclean: clean
-	@rm -f $(_name)
+	@rm -f $(name)
 
 re: fclean all
 
