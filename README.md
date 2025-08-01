@@ -16,10 +16,10 @@ The C++ track at 42 is divided into several modules, each introducing progressiv
 - **Module 05** – Introduction to C++ exception handling: try/catch blocks, creating and managing custom exceptions
 
 - **Module 06** – Type casting in C++: static_cast, dynamic_cast, reinterpret_cast, and when/how to use each safely
+  
+- **Module 07** – C++ templates: function and class templates
 
 # 🚀 Modules to be completed
-
-- **Module 07** – C++ templates: function and class templates, specialization, and template metaprogramming basics
 
 - **Module 08** – Templated containers, iterators, and algorithms: implementing your own container-like classes using templates
 
