@@ -1,81 +1,58 @@
 #include "PmergeMe.hpp"
 
-/*int main(int argc, char **argv)
-{
-	if (argc > 1)
-	{
-		PmergeMe p = PmergeMe(argv, argc);
-		RecursionResult res = p.split_sort(p.vect);
-
-		std::cout << "Maximos finales: ";
-		for (std::vector<int>::size_type i = 0; i < res.maximos_finales.size(); ++i) {
-			std::cout << res.maximos_finales[i] << " ";
-		}
-		std::cout << std::endl;
-
-		// Imprimir mínimos por nivel
-		for (std::vector< std::vector<int> >::size_type nivel = 0; nivel < res.minimos_por_nivel.size(); ++nivel) {
-			std::cout << "Minimos nivel " << nivel << ": ";
-			for (std::vector<int>::size_type j = 0; j < res.minimos_por_nivel[nivel].size(); ++j) {
-				std::cout << res.minimos_por_nivel[nivel][j] << " ";
-			}
-			std::cout << std::endl;
-		}
-
-		std::vector<int> pos;
-
-		// PRUEBA ORDENAR MAXIMOS
-		int max = p.get_index(p.vect, res.maximos_finales[0]);
-		pos.push_back(max);
-		for (std::vector< std::vector<int> >::size_type nivel = 0; nivel < res.minimos_por_nivel.size(); ++nivel)
-		{
-			for (std::vector<int>::size_type j = 0; j < res.minimos_por_nivel[nivel].size() + 1; ++j)
-			{
-				// si es menor que el max -> inserto donde sea
-				if (p.get_index(p.vect, res.minimos_por_nivel[nivel][j]) < max)
-				{
-					std::vector<int>::iterator it = std::lower_bound(pos.begin(), pos.end(), p.get_index(p.vect, res.minimos_por_nivel[nivel][j]));
-    				pos.insert(it, p.get_index(p.vect, res.minimos_por_nivel[nivel][j]));
-				}
-			}
-		}
-		std::cout << "Maximos fin: ";
-		for (std::vector<int>::size_type i = 0; i < pos.size(); ++i) {
-			std::cout << pos[i] << " ";
-		}
-		std::cout << std::endl;
-
-	}
-	else
-	{
-		std::cout << "Error: Invalid arguments [./PmergeMe 1 2 3 4 5]" << std::endl;
-		std::exit(1);
-	}
-}*/
-
-#include <iostream>
-#include <vector>
-
-
-
 int main(int argc, char **argv)
 {
 	if (argc > 1)
 	{
 		PmergeMe p = PmergeMe(argv, argc);
-		std::vector<int> max = p.obtain_max(p.vect);
-		std::vector<int> min = p.obtain_min(p.vect);
+
+		std::cout << "Before: ";
+		for (size_t i = 0; i < p.get_vect().size(); i++)
+		{
+			std::cout << p.get_vect()[i] << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+		clock_t start_vect = clock();
+		std::vector<int> max = p.obtain_max(p.get_vect());
+		std::vector<int> min = p.obtain_min(p.get_vect());
 		std::vector<int> sortedArr = p.mergeSort(max);
 
-		std::cout << "Maximos ordenados: ";
+		//p.binary_search(min, sortedArr, p.vect);
+		p.insert_with_jacobsthal(min, sortedArr,  p.get_vect());
+
+		std::cout << "After (vector): ";
 		for (size_t i = 0; i < sortedArr.size(); i++)
 		{
 			std::cout << sortedArr[i] << " ";
 		}
 		std::cout << std::endl;
+		std::cout << std::endl;
 
-		p.binary_search(min, sortedArr, p.vect);
+		clock_t end_vect = clock();
+    	double time_vect = double(end_vect - start_vect) / CLOCKS_PER_SEC;
+    	std::cout << "Time to process a range of " << sortedArr.size() << " elements with std::vector : " << time_vect << " s" << std::endl;
+		std::cout << std::endl;
 
+		clock_t start_list = clock();
+
+		std::list<int> maxl = p.obtain_max_list(p.get_list());
+		std::list<int> minl = p.obtain_min_list(p.get_list());
+		std::list<int> sortedArrl = p.mergeSort_list(maxl);
+
+		p.insert_with_jacobsthal_list(minl, sortedArrl,  p.get_list());
+
+		std::cout << "After (list): ";
+		for (std::list<int>::const_iterator it = sortedArrl.begin(); it != sortedArrl.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+		clock_t end_list = clock();
+    	double time_list = double(end_list - start_list) / CLOCKS_PER_SEC;
+    	std::cout << "Time to process a range of " << sortedArrl.size() << " elements with std::list : " << time_list << " s" << std::endl;
 	}
 	else
 	{

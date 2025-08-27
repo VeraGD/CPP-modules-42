@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() // Meter en vect todos lo snumeros y tambien en list
+
+PmergeMe::PmergeMe() 
 {
 	
 }
@@ -13,6 +14,22 @@ PmergeMe::PmergeMe(char **argv, int argc)
 		vect.push_back(std::atoi(argv[i]));
 		lis.push_back(std::atoi(argv[i]));
 	}
+}
+
+PmergeMe::PmergeMe(const PmergeMe& r)
+{
+    vect = r.vect;
+    lis  = r.lis;
+}
+
+PmergeMe& PmergeMe::operator=(const PmergeMe& r)
+{
+    if (this != &r)
+    {
+        vect = r.vect;
+        lis  = r.lis;
+    }
+    return *this;
 }
 
 PmergeMe::~PmergeMe() {}
@@ -33,44 +50,16 @@ void PmergeMe::check_params(char **argv, int argc)
 	}
 }
 
-/*void PmergeMe::split_sort(int n_pairs)
+std::vector<int> PmergeMe::get_vect()
 {
-	for(unsigned int i = 0; i < vect.size() - n_pairs - 1; i = i + n_pairs)
-    {
-		if (vect[i] > vect[i + n_pairs - 1])
-		{
-			int a = vect[i];
-			vect[i] = vect[i + n_pairs - 1];
-			vect[i + 1] = a;
-		}
-    }
-	for (std::vector<int>::const_iterator it = vect.begin(); it != vect.end(); ++it) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-}*/
+    return vect;
+}
 
-/*std::vector<int> PmergeMe::split_sort(std::vector<int> max, std::vector<int> new_max)
+std::list<int> PmergeMe::get_list()
 {
-	// comparo de dos en dos
-	for(unsigned int i = 0; i < max.size() - 1; i = i + 2)
-	{
-		if (max[i] > max[i+1])
-			new_max.push_back(max[i]);
-		else
-			new_max.push_back(max[i+1]);
-	}
-	if (new_max.size() > 1)
-	{
-		max = split_sort(max, new_max);
-	}
-	else
-	{
-		std::cout << "Maximo: " << max[0] << std::endl;
-		std::cout << "Recursivo para abajo" << std::endl;
-	}
-	return new_max;
-}*/
+    return lis;
+}
+
 
 int PmergeMe::get_index(std::vector<int> pos, int to_find)
 {
@@ -82,243 +71,14 @@ int PmergeMe::get_index(std::vector<int> pos, int to_find)
 	return 0;
 }
 
-/*std::vector<int> PmergeMe::split_sort(std::vector<int> max, std::vector<int> min, std::vector<int> pos)
+size_t PmergeMe::get_index_list(const std::list<int> &lst, int value)
 {
-    // condicion parada -> que solo hay un maximo. Va hacia atras la recursividad
-    if (max.size() <= 1)
-	{
-		std::cout << "Aqui voy para atras" << std::endl;
-		std::cout << "get index: " << get_index(pos, 8) << std::endl;
-		std::cout << "Min: " << max[0] << " " << min[0] << " " << pos[0] << std::endl;
-		std::cout << "Min: " << max[1] << " " << min[1] << " " << pos[1] << std::endl;
-		std::cout << "Min: " << max[2] << " " << min[2] << " " << pos[2] << std::endl;
-		std::cout << "Min: " << max[3] << " " << min[3] << " " << pos[3] << std::endl;
-		std::cout << "Min: " << max[4] << " " << min[4] << " " << pos[4] << std::endl;
-		return max;
-	}
-
-    std::vector<int> new_max;
-
-    // saco máximos de los pares y minimos
-    for (unsigned int i = 0; i + 1 < max.size(); i += 2)
-    {
-		pos.push_back(max[i]);
-		pos.push_back(max[i+1]);
-        if (max[i] > max[i+1])
-		{
-			new_max.push_back(max[i]);
-			min.push_back(max[i+1]);
-			//pos.push_back(i+1);
-		}
-        else
-        {
-			new_max.push_back(max[i+1]);
-			min.push_back(max[i]);
-			//pos.push_back(i);
-		}
+    size_t idx = 0;
+    for (std::list<int>::const_iterator it = lst.begin(); it != lst.end(); ++it, ++idx) {
+        if (*it == value) return idx;
     }
-
-    // si hay un elemento impar al final, se lleva directo
-    if (max.size() % 2 != 0)
-	{
-		new_max.push_back(max.back());
-		pos.push_back(max.back());
-	}
-
-    // llamada recursiva sobre la nueva lista de máximos
-    return split_sort(new_max, min, pos);
-}*/
-
-//--------------------------------------------------------------------------------------------------------------------------------------------------
-/*RecursionResult PmergeMe::split_sort(const std::vector<int>& arr) {
-    RecursionResult result;
-
-    // caso base
-    if (arr.size() <= 1) {
-        result.maximos_finales = arr;
-        return result;
-    }
-
-    std::vector<int> maximos;
-    std::vector<int> minimos;
-
-    // comparo de dos en dos
-    for (size_t i = 0; i + 1 < arr.size(); i += 2) {
-        if (arr[i] > arr[i+1]) {
-            maximos.push_back(arr[i]);
-            minimos.push_back(arr[i+1]);
-        } else {
-            maximos.push_back(arr[i+1]);
-            minimos.push_back(arr[i]);
-        }
-    }
-
-    // impar → último va a máximos
-    if (arr.size() % 2 != 0)
-        maximos.push_back(arr.back());
-
-    // llamada recursiva con un vector más pequeño
-    RecursionResult rec = split_sort(maximos);
-
-    rec.minimos_por_nivel.insert(rec.minimos_por_nivel.begin(), minimos);
-
-    return rec;
-}*/
-
-// RECURSION 8 Y LUEGO PAREJAS
-/*RecursionResult PmergeMe::split_sort(const std::vector<int>& arr) {
-    RecursionResult result;
-
-    if (arr.size() <= 1) {
-        result.maximos_finales = arr;
-        return result;
-    }
-
-    std::vector<int> maximos;
-    std::vector< std::pair<int,int> > minimos;
-
-    // comparo de dos en dos
-    for (size_t i = 0; i + 1 < arr.size(); i += 2) {
-        if (arr[i] > arr[i+1]) {
-            maximos.push_back(arr[i]);
-            minimos.push_back(std::make_pair(arr[i+1], arr[i]));
-        } else {
-            maximos.push_back(arr[i+1]);
-            minimos.push_back(std::make_pair(arr[i], arr[i+1]));
-        }
-    }
-
-    // impar
-    if (arr.size() % 2 != 0) {
-        maximos.push_back(arr.back());
-    }
-
-    // recursión para ordenar los máximos
-    RecursionResult rec = split_sort(maximos);
-
-    // unir resultados
-    result.maximos_finales = rec.maximos_finales;
-    result.pares_minimos = rec.pares_minimos;
-    result.pares_minimos.insert(result.pares_minimos.end(), minimos.begin(), minimos.end());
-
-    return result;
-}*/
-
-/*void PmergeMe::insertar_ordenado(std::vector<int>& vec, int valor) {
-    std::vector<int>::iterator it = vec.begin();
-    while (it != vec.end() && *it < valor) {
-        ++it;
-    }
-    vec.insert(it, valor);
-}*/
-
-
-/*RecursionResult PmergeMe::split_sort(const std::vector<int>& arr) {
-    RecursionResult result;
-
-    if (arr.size() <= 1) {
-        result.maximos_finales = arr;
-        return result;
-    }
-
-    std::vector<int> maximos;
-    std::vector< std::pair<int,int> > minimos;
-
-    // comparo de dos en dos
-    for (size_t i = 0; i + 1 < arr.size(); i += 2) {
-        if (arr[i] > arr[i+1]) {
-            maximos.push_back(arr[i]);
-            minimos.push_back(std::make_pair(arr[i+1], arr[i]));
-        } else {
-            maximos.push_back(arr[i+1]);
-            minimos.push_back(std::make_pair(arr[i], arr[i+1]));
-        }
-    }
-
-    // impar -> último pasa como máximo
-    if (arr.size() % 2 != 0) {
-        maximos.push_back(arr.back());
-    }
-
-    // recursión con los máximos
-    RecursionResult rec = split_sort(maximos);
-
-    // ahora los máximos de "rec" ya vienen ordenados
-    result.maximos_finales = rec.maximos_finales;
-
-    // insertar en orden los máximos de este nivel
-    for (size_t i = 0; i < maximos.size(); i++) {
-        insertar_ordenado(result.maximos_finales, maximos[i]);
-    }
-
-    // acumular pares mínimos
-    result.pares_minimos = rec.pares_minimos;
-    result.pares_minimos.insert(result.pares_minimos.end(), minimos.begin(), minimos.end());
-
-    return result;
-}*/
-
-/*std::vector<int> PmergeMe::split_sort(const std::vector<int>& arr) {
-    // caso base: ya no hay nada que dividir
-    if (arr.size() <= 1) {
-        return arr;
-    }
-
-    std::vector<int> maximos;
-
-    // comparo de dos en dos y guardo el mayor
-    for (size_t i = 0; i + 1 < arr.size(); i += 2) {
-        if (arr[i] > arr[i+1]) {
-            maximos.push_back(arr[i]);
-        } else {
-            maximos.push_back(arr[i+1]);
-        }
-    }
-
-    // si hay impar, lo añado tal cual
-    if (arr.size() % 2 != 0) {
-        maximos.push_back(arr.back());
-    }
-
-    // llamada recursiva con los nuevos máximos
-    return split_sort(maximos);
-}*/
-
-/*std::vector<int> PmergeMe::split_sort(std::vector<int> max, std::vector<int> new_max)
-{
-    // vector estático que guarda todos los mínimos encontrados
-    static std::vector<int> minimos;
-
-    // comparo de dos en dos
-    for (unsigned int i = 0; i < max.size() - 1; i += 2)
-    {
-        if (max[i] > max[i+1]) {
-            new_max.push_back(max[i]);
-            minimos.push_back(max[i+1]);   // guardo el mínimo
-        } else {
-            new_max.push_back(max[i+1]);
-            minimos.push_back(max[i]);     // guardo el mínimo
-        }
-    }
-
-    if (new_max.size() > 1)
-    {
-        max = split_sort(max, new_max);
-    }
-    else
-    {
-        std::cout << "Maximo: " << max[0] << std::endl;
-        std::cout << "Recursivo para abajo" << std::endl;
-
-        // antes de terminar, puedo usar los mínimos
-        std::cout << "Minimos acumulados: ";
-        for (size_t i = 0; i < minimos.size(); i++)
-            std::cout << minimos[i] << " ";
-        std::cout << std::endl;
-    }
-
-    return new_max;
-}*/
+    return idx;
+}
 
 // Función para fusionar dos vectores ordenados
 std::vector<int> PmergeMe::merge(const std::vector<int>& left, const std::vector<int>& right)
@@ -326,7 +86,6 @@ std::vector<int> PmergeMe::merge(const std::vector<int>& left, const std::vector
     std::vector<int> result;
     size_t i = 0, j = 0;
 
-    // Comparar elementos de left y right y agregarlos al resultado
     while (i < left.size() && j < right.size())
 	{
         if (left[i] < right[j])
@@ -340,7 +99,6 @@ std::vector<int> PmergeMe::merge(const std::vector<int>& left, const std::vector
             j++;
         }
     }
-    // Agregar los elementos restantes
     while (i < left.size())
 	{
         result.push_back(left[i]);
@@ -355,6 +113,25 @@ std::vector<int> PmergeMe::merge(const std::vector<int>& left, const std::vector
     return result;
 }
 
+std::list<int> PmergeMe::merge_list(const std::list<int>& left, const std::list<int>& right)
+{
+    std::list<int> result;
+    std::list<int>::const_iterator it_left = left.begin();
+    std::list<int>::const_iterator it_right = right.begin();
+
+    while (it_left != left.end() && it_right != right.end()) {
+        if (*it_left < *it_right) {
+            result.push_back(*it_left++);
+        } else {
+            result.push_back(*it_right++);
+        }
+    }
+    while (it_left != left.end()) result.push_back(*it_left++);
+    while (it_right != right.end()) result.push_back(*it_right++);
+
+    return result;
+}
+
 // Función MergeSort recursiva
 std::vector<int> PmergeMe::mergeSort(const std::vector<int>& arr)
 {
@@ -363,18 +140,28 @@ std::vector<int> PmergeMe::mergeSort(const std::vector<int>& arr)
 
     int mid = arr.size() / 2;
 
-    // Crear subvectores para la izquierda y la derecha
     std::vector<int> left(arr.begin(), arr.begin() + mid);
     std::vector<int> right(arr.begin() + mid, arr.end());
 
-    // Ordenar recursivamente y fusionar
     return merge(mergeSort(left), mergeSort(right));
+}
+
+std::list<int> PmergeMe::mergeSort_list(const std::list<int>& lst)
+{
+    if (lst.size() <= 1) return lst;
+
+    std::list<int>::const_iterator mid_it = lst.begin();
+    std::advance(mid_it, lst.size() / 2);
+
+    std::list<int> left(lst.begin(), mid_it);
+    std::list<int> right(mid_it, lst.end());
+
+    return merge_list(mergeSort_list(left), mergeSort_list(right));
 }
 
 std::vector<int> PmergeMe::obtain_max(std::vector<int> arr)
 {
     std::vector<int> maximos;
-    // comparo de dos en dos
     for (size_t i = 0; i + 1 < arr.size(); i += 2)
 	{
         if (arr[i] > arr[i+1])
@@ -387,10 +174,25 @@ std::vector<int> PmergeMe::obtain_max(std::vector<int> arr)
     return maximos;
 }
 
+std::list<int> PmergeMe::obtain_max_list(const std::list<int>& lst)
+{
+    std::list<int> maximos;
+    std::list<int>::const_iterator it = lst.begin();
+
+    while (it != lst.end()) {
+        int first = *it++;
+        if (it == lst.end()) {
+            maximos.push_back(first);
+            break;
+        }
+        int second = *it++;
+        maximos.push_back(std::max(first, second));
+    }
+    return maximos;
+}
 std::vector<int> PmergeMe::obtain_min(std::vector<int> arr)
 {
     std::vector<int> min;
-    // comparo de dos en dos
     for (size_t i = 0; i + 1 < arr.size(); i += 2)
 	{
         if (arr[i] > arr[i+1])
@@ -401,55 +203,166 @@ std::vector<int> PmergeMe::obtain_min(std::vector<int> arr)
     return min;
 }
 
-/*int search_pair(int min, std::vector<int> ori)
+std::list<int> PmergeMe::obtain_min_list(const std::list<int>& lst)
 {
+    std::list<int> minimos;
+    std::list<int>::const_iterator it = lst.begin();
 
-}*/
+    while (it != lst.end()) {
+        int first = *it++;
+        if (it == lst.end()) {
+            break;
+        }
+        int second = *it++;
+        minimos.push_back(std::min(first, second));
+    }
+    return minimos;
+}
 
-
-void PmergeMe::binary_search(std::vector<int> min, std::vector<int> max, std::vector<int> ori)
+// Búsqueda binaria estilo lower_bound en rango [left, right)
+int PmergeMe::search_range(const std::vector<int>& arr, int target, int left, int right)
 {
-	int flag = 0;
-	for (size_t i = 0; i < min.size(); i++)
-	{
-		double j = (pow(2, i) - (pow(-1, i))) / 3;
-		if (j < (double)min.size())
-			std::cout << "JAC: " << j << std::endl;
-		else
-		{
-			flag = 1;
-			break ;
-		}
-		int i_min = get_index(ori, min[j]);
-		int n_max;
-		// si es par el minimo
-		if (i_min % 2 == 0)
-		{
-			std::cout << "MAX num: " << ori[i_min + 1] << std::endl;
-			
-			n_max = get_index(max, ori[i_min + 1]);
-			std::cout << "MAX: " << n_max << std::endl;
-		}
-		else
-		{
-			std::cout << "MAX num: " << ori[i_min - 1] << std::endl;
-			n_max = get_index(max, ori[i_min - 1]);
-			std::cout << "MAX: " << n_max << std::endl;
-		}
-		// Busco el indice de el maximo (pareja) en los maximos
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (target <= arr[mid])
+            right = mid;
+        else
+            left  = mid + 1;
+    }
+    return left;
+}
 
-		std::cout << "MIN: " << min[j] << std::endl;
-		// selecciono rango
-		// SI ES 0
-		if (n_max == 0)
-		{
-			max.insert(max.begin(), min[j]);
-			min.erase(min.begin() + j);
-		}
-		// SI NO ES 0::
+std::list<int>::iterator PmergeMe::search_range_list(int target, std::list<int>::iterator left, std::list<int>::iterator right)
+{
+    while (left != right)
+    {
+        std::list<int>::iterator mid = left;
+        std::advance(mid, std::distance(left, right) / 2);
+        if (target <= *mid)
+            right = mid;
+        else
+            left = ++mid;
+    }
+    return left;
+}
 
-		// voy comparando hasta encontrar el sitio (rango)
-		// INSERTO EN EL SITIO
-	}
-	// SI LA FLAG ES 1, VOY PARA ATRAS, HAGO LO MISMO, PERO EN FOR PRINCIPAL INVERSO
+// Generar orden de índices usando números de Jacobsthal
+std::vector<size_t> PmergeMe::ford_johnson_order(size_t n) {
+    std::vector<size_t> order;
+    size_t Jprev = 0;
+    size_t J = 1;
+
+    while (J < n) {
+        size_t t = J;
+        while (t-- > Jprev) {
+            order.push_back(t);
+        }
+        size_t Jnext = J + 2 * Jprev;
+        Jprev = J;
+        J = Jnext;
+    }
+    size_t t = n;
+    while (t-- > Jprev) {
+        order.push_back(t);
+    }
+    return order;
+}
+
+std::list<size_t> PmergeMe::ford_johnson_order_list(size_t n)
+{
+    std::list<size_t> order;
+    size_t Jprev = 0, J = 1;
+
+    while (J < n) {
+        size_t t = J;
+        while (t-- > Jprev) order.push_back(t);
+        size_t Jnext = J + 2 * Jprev;
+        Jprev = J;
+        J = Jnext;
+    }
+    size_t t = n;
+    while (t-- > Jprev) order.push_back(t);
+    return order;
+}
+
+// Busca el índice de un valor en un vector
+size_t PmergeMe::index_of(const std::vector<int>& v, int val)
+{
+    std::vector<int>::const_iterator it = std::find(v.begin(), v.end(), val);
+    return static_cast<size_t>(it - v.begin());
+}
+
+size_t PmergeMe::index_of_list(const std::list<int>& lst, int val)
+{
+    size_t idx = 0;
+    for (std::list<int>::const_iterator it = lst.begin(); it != lst.end(); ++it, ++idx) {
+        if (*it == val) return idx;
+    }
+    return idx;
+}
+
+void PmergeMe::insert_with_jacobsthal(std::vector<int>& mins, std::vector<int>& chain, const std::vector<int>& ori)
+{
+    std::vector<size_t> ins_order = ford_johnson_order(mins.size());
+
+    for (size_t k_i = 0; k_i < ins_order.size(); ++k_i) {
+        size_t k = ins_order[k_i];
+        int m = mins[k];
+
+        size_t pos_in_ori = index_of(ori, m);
+        int pair_max;
+        if (pos_in_ori % 2 == 0)
+            pair_max = ori[pos_in_ori + 1];
+        else
+            pair_max = ori[pos_in_ori - 1];
+
+        size_t idx_max_in_chain = index_of(chain, pair_max);
+
+        int insert_pos = search_range(chain, m, 0, static_cast<int>(idx_max_in_chain) + 1);
+        chain.insert(chain.begin() + insert_pos, m);
+    }
+}
+
+static std::list<int>::iterator lower_bound_range_list(int value, std::list<int>::iterator first, std::list<int>::iterator last)
+{
+    for (std::list<int>::iterator it = first; it != last; ++it) {
+        if (value <= *it) return it;
+    }
+    return last;
+}
+
+void PmergeMe::insert_with_jacobsthal_list(std::list<int>& mins, std::list<int>& chain, const std::list<int>& ori)     
+{
+    std::list<size_t> ins_order = ford_johnson_order_list(mins.size());
+
+    for (std::list<size_t>::const_iterator oit = ins_order.begin();
+         oit != ins_order.end(); ++oit)
+    {
+        size_t k = *oit;
+
+        std::list<int>::iterator it_m = mins.begin();
+        std::advance(it_m, k);
+        int m = *it_m;
+
+        size_t pos_in_ori = index_of_list(ori, m);
+
+        int pair_max;
+        std::list<int>::const_iterator it_ori = ori.begin();
+        if (pos_in_ori % 2 == 0)
+            std::advance(it_ori, pos_in_ori + 1);
+        else
+            std::advance(it_ori, pos_in_ori - 1);
+        pair_max = *it_ori;
+
+        size_t idx_pair = index_of_list(chain, pair_max);
+        std::list<int>::iterator it_pair = chain.begin();
+        std::advance(it_pair, idx_pair);
+
+        std::list<int>::iterator one_past_pair = it_pair;
+        ++one_past_pair;
+
+        std::list<int>::iterator pos = lower_bound_range_list(m, chain.begin(), one_past_pair);
+
+        chain.insert(pos, m);
+    }
 }

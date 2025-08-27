@@ -49,14 +49,12 @@ int BitcoinExchange::check_month(std::string d)
 	std::string m30[4] = {"04", "06", "09", "11"};
 	std::string m28 = "02";
 
-	// Get the month and the day
 	std::string month = d.substr(5, 2);
     std::string day = d.substr(8, 2);
 	int dd;
 	std::stringstream ss(day);
     ss >> dd;
 
-	// Check the month and day (January has 31 days, April has 30...)
 	int i = 0;
 	while (i < 7)
 	{
@@ -66,7 +64,7 @@ int BitcoinExchange::check_month(std::string d)
 			return 0;
 		else if (month == "02" && check_leap(d) == 1 && dd > 29)
 			return 1;
-		else if (month == "02" && check_leap(d) == 0 && dd > 28) // si no es bisiesto
+		else if (month == "02" && check_leap(d) == 0 && dd > 28)
 			return 1;
 		i++;
 	}
@@ -78,7 +76,7 @@ int BitcoinExchange::check_date_limit(std::string d)
 {
 	if (d.size() < 10)
     return 1;
-	// Get the year, the month and the day
+
     std::string year_str = d.substr(0, 4);
     std::string month_str = d.substr(5, 2);
     std::string day_str = d.substr(8, 2);
@@ -89,12 +87,10 @@ int BitcoinExchange::check_date_limit(std::string d)
     sm >> m;
     sd >> dd;
 
-	// check range
     if (y < 0 || m < 1 || m > 12 || dd < 1 || dd > 31) {
         return 1;
     }
 
-	// check with current date
     std::time_t t = std::time(0);
     std::tm* now = std::localtime(&t);
 
@@ -177,13 +173,12 @@ void BitcoinExchange::read_database(std::string file)
 	std::string line;
 	std::string date;
 	int index = 0;
-	// read the data
 	std::ifstream infile;
 	read_file(file, infile);
-	// get lines and put them into the map
+
 	while (std::getline(infile, line))
 	{
-		if (index != 0 || (line[0] >= '0' && line[0] <= '9')) // ignore header
+		if (index != 0 || (line[0] >= '0' && line[0] <= '9'))
 		{
 			std::stringstream ss(line);
 			std::string date, price;
@@ -191,7 +186,7 @@ void BitcoinExchange::read_database(std::string file)
 			if (std::getline(ss, date, ',') && std::getline(ss, price))
 				fill_map(date, price);
 			else
-				std::cout << "Error: Line format invalid" << std::endl; // ft_error
+				std::cout << "Error: Line format invalid" << std::endl;
 		}
 		index = 1;
 	}
@@ -200,7 +195,6 @@ void BitcoinExchange::read_database(std::string file)
 // check the input num value, positive, not empty, just numbers
 int BitcoinExchange::check_num_value(std::string d)
 {
-	// check if it's a float
 	int i = 0;
 	while(d[i])
 	{
@@ -216,13 +210,12 @@ int BitcoinExchange::check_num_value(std::string d)
 	std::stringstream ss(d);
     ss >> fnum;
 
-	// check sign
 	if(fnum < 0)
 	{
 		std::cout << "Error: not a positive number." << std::endl;
 		return 1;
 	}
-	else if (fnum > 1000)  // check range
+	else if (fnum > 1000)
 	{
 		std::cout << "Error: too large a number." << std::endl;
 		return 1;
@@ -233,20 +226,17 @@ int BitcoinExchange::check_num_value(std::string d)
 // calculate amount price (value * amount)
 float BitcoinExchange::calculate_amount(float n, std::string date)
 {
-	// search the date on the map
 	std::map<std::string, float>::iterator it = dicc.find(date);
 	if (it != dicc.end())
 		return static_cast<float>(n * it->second);
 	else
 	{
-		// if date doesn't exit, check if there are any date before it
 		const std::string& date_min = dicc.begin()->first;
 		if (date < date_min)
 		{
 			std::cout << "Error: There is no date available in the dictionary to perform the calculation." << std::endl;  // la fecha es menor que la mínima del diccionario
 			return -1;
 		}
-		// Subtract one day if there are dates below.
 		int y, m, d;
 		std::stringstream ss_y(date.substr(0, 4));
 		std::stringstream ss_m(date.substr(5, 2));
@@ -254,17 +244,13 @@ float BitcoinExchange::calculate_amount(float n, std::string date)
 		ss_y >> y;
 		ss_m >> m;
 		ss_d >> d;
-		// Create struct tm
 		std::tm t = {};
 		t.tm_year = y - 1900;
 		t.tm_mon = m - 1;
-		t.tm_mday = d - 1; // Subtract one day 
-		// Normalise the date
+		t.tm_mday = d - 1;
 		std::mktime(&t);
-		// Convert back to string YYYY-MM-DD
 		char buffer[11];
 		std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", &t);
-		// Recursive function: search for the new date
 		return calculate_amount(n, buffer);
 	}
 }
@@ -273,23 +259,22 @@ float BitcoinExchange::calculate_amount(float n, std::string date)
 void BitcoinExchange::check_perform_amount(std::string date, std::string num)
 {
 	if (date.length() > 10)
-		date = date.substr(0, 10); // clean the spaces at the end
-	if (check_date_format(date) != 0) // check format
+		date = date.substr(0, 10);
+	if (check_date_format(date) != 0)
 		std::cout << "Error invalid date input format => " << date << std::endl;
-	else if (check_month(date) != 0 || check_date_limit(date) != 0) // check date
+	else if (check_month(date) != 0 || check_date_limit(date) != 0)
 		std::cout << "Error date does not exist => " << date << std::endl;
 	else
 	{
 		int i = 0;
-		if (!num.empty()) // clean spaces before num
+		if (!num.empty())
 		{
 			while(num[i] == ' ')
 				i++;
 			num = num.substr(i);
 		}
-		if (check_num_value(num) == 0) // check num
+		if (check_num_value(num) == 0)
 		{
-			// calculate and print the result
 			float fnum;
 			std::stringstream ss(num);
 			ss >> fnum;
@@ -308,13 +293,11 @@ void BitcoinExchange::read_input(std::string file)
 	int index;
 
 	index = 0;
-	// read input
 	std::ifstream infile;
 	read_file(file, infile);
-	// get lines and print result
 	while (std::getline(infile, line))
 	{
-		if (index != 0 || (line[0] >= '0' && line[0] <= '9')) // ignore header
+		if (index != 0 || (line[0] >= '0' && line[0] <= '9'))
 		{
 			std::stringstream ss(line);
 			std::string date, num;
