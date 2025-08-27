@@ -21,9 +21,7 @@ The C++ track at 42 is divided into several modules, each introducing progressiv
 
 - **Module 08** – Templated containers, iterators, and algorithms
 
-# 🚀 Modules to be completed
-
-- **Module 09** – Functional programming tools in C++: function pointers, functors, lambdas, std::function, and more STL algorithms
+- **Module 09** – Functional programming tools in C++: function pointers, functors, std::function, and more STL algorithms
 
 # 🔧 How to Use
 You can clone this repository and compile each exercise for each module separately. Most folders contain a Makefile to simplify compilation.
